@@ -1,0 +1,42 @@
+import * as React from 'react';
+import { Text, View } from 'react-native';
+import {
+  createStaticNavigation,
+  useNavigation,
+} from '@react-navigation/native';
+import { Button } from '@react-navigation/elements';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import Cilindro from "./components/cilindro";
+import Cono from "./components/cono";
+import Imc from "./components/imc";
+import Promedio from "./components/promedio";
+
+
+function HomeScreen() {
+  const navigation = useNavigation();
+
+  return (
+    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+      <Text>Home Screen</Text>
+      <Button onPress={() => navigation.navigate('Profile')}>
+        Go to Profile
+      </Button>
+    </View>
+  );  
+}
+
+
+const MyTabs = createBottomTabNavigator({
+  screens: {
+    Cilindro: Cilindro,
+    Cono: Cono,
+    IMC: Imc,
+    Promedio: Promedio,
+  },
+});
+
+const Navigation = createStaticNavigation(MyTabs);
+
+export default function App() {
+  return <Navigation />;
+}
